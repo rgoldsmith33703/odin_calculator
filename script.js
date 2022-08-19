@@ -36,6 +36,7 @@ let digitButtons = document.querySelectorAll('.digit');
 let operatorButtons = document.querySelectorAll('.operator');
 let buttons = document.querySelectorAll('button');
 let equals = document.querySelector('#equals').textContent;
+let clear = document.querySelector('#clear');
 
 let digits = [];
 let operators = [];
@@ -44,6 +45,12 @@ operatorButtons.forEach(button => operators.push(button.textContent));
 
 let num1;
 let num2;
+
+clear.addEventListener('click', e => {
+    num1 = undefined
+    num2 = undefined
+    display.textContent = ''
+})
 
 buttons.forEach(button => {
     button.addEventListener('click', e => {
