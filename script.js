@@ -38,6 +38,7 @@ let buttons = document.querySelectorAll('button');
 let equals = document.querySelector('#equals').textContent;
 let clear = document.querySelector('#clear');
 
+let clearDigits = false;
 let digits = [];
 let operators = [];
 digitButtons.forEach(button => digits.push(button.textContent));
@@ -55,6 +56,10 @@ clear.addEventListener('click', e => {
 buttons.forEach(button => {
     button.addEventListener('click', e => {
         if ((digits.includes(e.target.textContent))) {
+            if (clearDigits === true) {
+                display.textContent = ''
+                clearDigits = false
+            }
             display.textContent += e.target.textContent
         } else if (operators.includes(e.target.textContent)) {
             if (num1 === undefined) {
@@ -66,6 +71,7 @@ buttons.forEach(button => {
                 display.textContent = operate(operator, num1, num2)
                 num1 = num2
                 operator = e.target.textContent
+                clearDigits = true
             }
         }  else if (e.target.textContent === equals) {
             num2 = parseInt(display.textContent)
