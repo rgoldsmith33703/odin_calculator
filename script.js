@@ -42,18 +42,27 @@ let operators = [];
 digitButtons.forEach(button => digits.push(button.textContent));
 operatorButtons.forEach(button => operators.push(button.textContent));
 
+let num1;
+let num2;
+
 buttons.forEach(button => {
     button.addEventListener('click', e => {
         if ((digits.includes(e.target.textContent))) {
             display.textContent += e.target.textContent
         } else if (operators.includes(e.target.textContent)) {
-            num1 = parseInt(display.textContent)
-            operator = e.target.textContent
-            display.textContent = ''
+            if (num1 === undefined) {
+                num1 = parseInt(display.textContent)
+                operator = e.target.textContent
+                display.textContent = ''
+            } else {
+                num2 = parseInt(display.textContent)
+                display.textContent = operate(operator, num1, num2)
+                num1 = num2
+                operator = e.target.textContent
+            }
         }  else if (e.target.textContent === equals) {
             num2 = parseInt(display.textContent)
-            let result = operate(operator, num1, num2)
-            display.textContent = result
+            display.textContent = operate(operator, num1, num2)
         }
     })
 })
